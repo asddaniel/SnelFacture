@@ -58,12 +58,44 @@
         <div class="card">
                 <div class="table-heading">
                 <h2>Factures</h2>
+                <div class="row pt-2">
+
+                <form name="filtre" class="row">
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <select name="selected_status" id="" class="px-2">
+                                <option value="all">all</option>
+                                <option value="pending">non payer</option>
+                                <option value="paid">payer</option>
+                            </select>
+                            <div class="pt-3">
+                <button class="btn btn-primary text-white p-2 fw-bold ">Filtrer</button>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <label for="date">Entre</label>
+                            <input type="date" name="debut" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="datefin">Et</label>
+                            <input type="date" name="fin" class="form-control" id="" required>
+                        </div>
+                    </div>
+
+
+                </form>
+
+                </div>
                 </div>
         <div class="table-responsive">
         <table class="table  custom-table no-footer">
             <thead>
                 <tr>
                         <th>clients</th>
+                        <th>uid clients</th>
                         <th>montant</th>
                         <th>categorie client</th>
                         <th>mois</th>
@@ -78,7 +110,7 @@
             @foreach ($factures as $facture)
 
 
-            <tr>
+            <tr class="table-row {{ $facture->payed==1 ? 'bg-success text-white' : '' }}" data-fact="{{ json_encode($facture) }}">
                     <td>
                         <div class="table-img">
                         <a href="#">
@@ -86,12 +118,23 @@
                         </a>
                         </div>
                     </td>
+                    <td class="text-uppercase">{{ $facture->client->uid }}</td>
                     <td>{{ $facture->montant }}</td>
                     <td>{{ $facture->client->clientcategorie->name }}</td>
-                    <td>{{ $facture->month }}</td>
-                    <td>{{ $facture->payed }}</td>
+                    <td>{{ substr($facture->month, 0, 7) }}</td>
+                    @if ($facture->payed==1)
+                    <td class=" fw-bold"> Payé </td>
+                    @else
+                       <td class="d-flex">
+                        <form action="{{ route('factures.pay', $facture->id) }}" method="post">
+                            @csrf
+                            <button class="btn btn-success p-2 text-white fw-bold">Payer</button>
+                        </form>
+                       </td>
+                    @endif
+
                     <td>
-                        <a href="{{ route('factures.show', $facture->id) }}" class="action_label">Modifier</a>
+
                     </td>
                     <td>
                         <form action="{{ route('factures.destroy', $facture->id) }}" method="post">
@@ -116,13 +159,27 @@
     </div>
     </div>
     <script>
-        function genererTexteAleatoire() {
-  let caracteres = "abcdefghijklmnopqrstuvwxyz0123456789"; // Définir les caractères possibles
-  let texteAleatoire = "";
-  for (let i = 0; i < 30; i++) {
-    texteAleatoire += caracteres.charAt(Math.floor(Math.random() * caracteres.length)); // Ajouter un caractère aléatoire au texte
-  }
-  return texteAleatoire;
-}
+        document.filtre.addEventListener('submit', function(e){
+            e.preventDefault();
+            const status = document.filtre.selected_status.value;
+            const start = document.filtre.debut.value;
+            const end = document.filtre.fin.value;
+            const all = document.querySelectorAll('.table-row');
+
+            all.forEach(element => {
+                const data = JSON.parse(element.getAttribute('data-fact'));
+
+              if((new Date(data.month))>=(new Date(start)) && (new Date(data.month))< (new Date(end))){
+                if((data.payed===1) == (status==='paid')) {
+                   element.classList.remove('hide');
+                   console.log(data)
+                }else{
+
+                    element.classList.add('hide')
+                }
+              }
+            });
+
+        })
     </script>
     @endsection

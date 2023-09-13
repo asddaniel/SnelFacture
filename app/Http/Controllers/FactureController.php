@@ -17,6 +17,7 @@ class FactureController extends StandardController
 
     protected $invokable = [
         "facture/add"=>["method"=>"post", "call"=>"create_facture", 'name'=>'add_facture'],
+        "facture/payer/{facture}"=>["method"=>"post", "call"=>"payer_facture", 'name'=>'factures.pay'],
     ];
 
     public function create_facture(AddFactureRequest $request){
@@ -32,6 +33,12 @@ class FactureController extends StandardController
             "montant"=>$client->clientcategorie->forfait->montant,
         ]);
         }
+        return redirect()->back();
+    }
+
+    public function payer_facture(Facture $facture){
+        $facture->payed = 1;
+        $facture->save();
         return redirect()->back();
     }
 
