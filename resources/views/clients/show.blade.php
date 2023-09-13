@@ -58,7 +58,7 @@
                         <label for="exampleFormControlInput1" style="font-weight: 700">Categorie</label>
                     <div class="form-group">
                     <select name="clientcategorie_id" id="" class="form-control">
-                         @foreach (App\Models\Clientcategorie::all() as $item)
+                         @foreach (App\Models\ClientCategorie::all() as $item)
                          <option value="{{ $item->id }}" {{ $item->id == $client->clientcategorie_id ? 'selected' : '' }}>{{ $item->name }}</option>
                          @endforeach
                     </select>
