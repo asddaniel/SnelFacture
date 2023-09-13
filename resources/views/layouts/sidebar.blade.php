@@ -45,7 +45,7 @@
     </ul>
     <ul class="logout">
     <li>
-    <a href="{{ route('logout') }}"><img src="{{ asset('assets/img/logout.svg') }}" alt="sidebar_img"><span>Log out</span></a>
+    <a href="{{ route('logout.get') }}"><img src="{{ asset('assets/img/logout.svg') }}" alt="sidebar_img"><span>Log out</span></a>
     </li>
     </ul>
     </div>

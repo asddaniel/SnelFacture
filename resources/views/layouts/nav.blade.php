@@ -2,10 +2,10 @@
 
     <div class="header-left">
     <a href="{{ route('dashboard') }}" class="logo">
-    <img src="{{ asset('images/logo_m_tech.png') }}" alt="Logo">
+    <img src="{{ asset('images.png') }}" alt="Logo">
     </a>
     <a href="index.html" class="logo logo-small">
-    <img src="{{ asset('images/logo_m_tech.png') }}" alt="Logo mastertech" width="30" height="30">
+    <img src="{{ asset('images.png') }}" alt="Logo mastertech" width="30" height="30">
     </a>
     <a href="javascript:void(0);" id="toggle_btn">
     <span class="bar-icon">
