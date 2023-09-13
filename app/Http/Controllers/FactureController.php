@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Facture;
 use App\Models\Client;
 use App\Http\Requests\StoreFactureRequest;
-use App\Http\Requests\addFactureRequest;
+use App\Http\Requests\AddFactureRequest;
 
 class FactureController extends StandardController
 {
