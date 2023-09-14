@@ -114,13 +114,13 @@
                     <td>
                         <div class="table-img">
                         <a href="#">
-                        <label>{{ $facture->client->name }}</label>
+                        <label>{{ $facture->client->name??'' }}</label>
                         </a>
                         </div>
                     </td>
-                    <td class="text-uppercase">{{ $facture->client->uid }}</td>
+                    <td class="text-uppercase">{{ $facture->client->uid??'' }}</td>
                     <td>{{ $facture->montant }}</td>
-                    <td>{{ $facture->client->clientcategorie->name }}</td>
+                    <td>{{ $facture->client->clientcategorie->name??'' }}</td>
                     <td>{{ substr($facture->month, 0, 7) }}</td>
                     @if ($facture->payed==1)
                     <td class=" fw-bold"> Payé </td>

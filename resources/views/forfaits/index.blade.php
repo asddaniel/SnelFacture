@@ -101,7 +101,7 @@
                     <td>
                         <div class="table-img">
                         <a href="#">
-                        <label>{{ $forfait->clientcategorie->name }}</label>
+                        <label>{{ $forfait->clientcategorie->name??'' }}</label>
                         </a>
                         </div>
                     </td>
