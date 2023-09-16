@@ -177,6 +177,8 @@
 
                     element.classList.add('hide')
                 }
+              }else{
+                element.classList.add('hide')
               }
             });
 

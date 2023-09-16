@@ -28,9 +28,9 @@ class FactureController extends StandardController
 
         foreach ($clients as $client) {
             Facture::create(["client_id"=>$client->id,
-            "forfait_id"=>$client->clientcategorie->forfait->id,
+            "forfait_id"=>$client->clientcategorie->forfait->id??'',
             "month"=>$month,
-            "montant"=>$client->clientcategorie->forfait->montant,
+            "montant"=>$client->clientcategorie->forfait->montant??0,
         ]);
         }
         return redirect()->back();
